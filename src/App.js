@@ -1,47 +1,32 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import Navigator from "./components/Navigator";
+import HOCS from "./pages/HOCS";
 import Home from "./pages/Home";
 import News from "./pages/News";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import UseReducerHook from "./hooks/useReducerHook";
+import UseMemoHook from "./hooks/UseMemoHook";
+import Hooks from "./pages/Hooks";
+import CustomHooks from "./hooks/CustomHooks";
+import UseContext from "./hooks/UseContext/UseContext";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=lviv&appid=d7315ac6df6def5485ee1555379ac7d3`;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        console.log(json);
-        setIsLoaded(true);
-        setData(json);
-      } catch (error) {
-        setIsLoaded(true);
-        throw new Error(error, "error");
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const filterData = (event) => {
-    return data.filter((user) => user.name.toLowerCase().includes(event));
-  };
-
-  const onChangeValue = (event) => {};
-
   return (
-    <div className="bg-red-400 ">
+    <div className=" h-screen">
       <Navigator />
       <Routes>
-        <Route path="/home" element={<Home data={data} />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/news/" element={<News />} />
+        <Route path="/hocs/" element={<HOCS />} />
+        <Route path="/hooks/" element={<Hooks />}>
+          <Route path="usereducer/" element={<UseReducerHook />} />
+          <Route path="usememo/" element={<UseMemoHook />} />
+          <Route path="customHooks/" element={<CustomHooks />} />
+          <Route path="useContext/" element={<UseContext />} />
+        </Route>
       </Routes>
+      <Outlet />
     </div>
   );
 }
