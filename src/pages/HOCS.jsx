@@ -1,28 +1,28 @@
 import React, { useState, useRef } from "react";
-import Button from "../components/Button";
+import styles from "../styles/Hocs.module.scss";
 
 function HOCS() {
-  const [userName, setUserName] = useState("Ihor");
-  const [newUserName, setNewUserName] = useState("");
+  const [open, setOpen] = useState(false);
 
-  function changeUserName() {
-    setUserName(newUserName);
-  }
+  const handleToggle = () => {
+    setOpen((e) => !e);
+  };
 
   return (
     <>
-      <div className={"m-5"}>
-        <h1>Hello: {userName}</h1>
-
-        <input
-          type="text"
-          className="input w-4"
-          onChange={(e) => setNewUserName(e.target.value)}
-        />
-        <button onClick={changeUserName} className="btn shadow-lg m-5">
-          change name
-        </button>
-        <Button />
+      <div className={"container m-5"}>
+        <h1>HOCS</h1>
+        <div className={styles.main}>
+          <h1>test</h1>
+          <p>hello</p>
+        </div>
+        <button onClick={handleToggle}>open modal</button>
+        {!open ? (
+          <div className={styles.modal}>
+            <h1>dialog</h1>
+            <button onClick={handleToggle}>close modal</button>
+          </div>
+        ) : null}
       </div>
     </>
   );

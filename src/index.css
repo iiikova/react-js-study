@@ -35,11 +35,3 @@
   color: red;
   background-color: var(--green);
 }
-.navlink {
-  display: inline-block;
-  text-decoration: underline;
-}
-.nav-link {
-  display: inline-block;
-  text-decoration: underline;
-}

@@ -1,0 +1,16 @@
+.modal {
+  --font-size: 1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-size);
+  border: 1px solid red;
+  backdrop-filter: green;
+  h1 {
+    font-size: var(--font-size);
+  }
+  p {
+    font-size: var(--font-size);
+  }
+}

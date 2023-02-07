@@ -1,57 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import styles from "../styles/News.module.scss";
 
-function News() {
-  const planet = [
-    { name: "mars", gasPlanet: true },
-    { name: "earth", gasPlanet: true },
-    { name: "mercury", gasPlanet: false },
-    { name: "moon", gasPlanet: true },
-    { name: "saturn", gasPlanet: false },
-  ];
+// CONTEXT
+import { NameContext } from "../Context";
 
-  const [show, setShow] = useState(false);
-  const [input, setInput] = useState("");
-  const [textColor, setTextColor] = useState("black");
+// ZUSTAND
+import { useName } from "../Store";
 
-  const showHide = () => {
-    setShow((show) => !show);
-  };
+const News = () => {
+  // const { name } = useContext(NameContext);
 
-  const handleInput = (event) => {
-    setInput(event.target.value);
-  };
+  const { name, age, count, inc, dec } = useName();
 
   return (
-    <div className="px-5">
-      <h1
-        className="text-lg font-bold"
-        style={{ color: textColor, cursor: "pointer" }}
-        onClick={() => setTextColor(textColor === "black" ? "red" : "black")}
-      >
-        News
-      </h1>
-      <div>
-        {planet.map((planet) => {
-          return (
-            <div>
-              <p>{planet.gasPlanet ? planet.name : null}</p>
-            </div>
-          );
-        })}
-      </div>
-      <hr className={"my-5"} />
-      <h2>{!show ? "Show" : "hide"} </h2>
-      <button
-        className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700  outline-none"
-        onClick={showHide}
-      >
-        toggle
+    <div className="container mx-5">
+      <h1>News</h1>
+      <p>my name is: {name}</p>
+      <p>age: {age}</p>
+      <p>count: {count}</p>
+      <button className="btn btn-primary" onClick={dec}>
+        -
       </button>
-      <hr className={"my-5"} />
-      <input type="text" onChange={handleInput} />
-      <h2>Input: {input}</h2>
+      <button className="btn btn-secondary" onClick={inc}>
+        +
+      </button>
     </div>
   );
-}
+};
 
 export default News;
